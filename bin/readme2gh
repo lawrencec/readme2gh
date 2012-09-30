@@ -6,8 +6,7 @@ var marked = require('marked');
 
 exec('git config --get remote.origin.url', function(err, d) {
     if(err) return console.log('Make sure your repo points to a GitHub remote!');
-    var path = '/' + d.split(':')[1].split('.')[0] + '/master/README.md';
-
+    var path = ['/',d.split('/').slice(3).join('/').replace('.git\n',''),'/master/README.md'].join('');
     var req = https.request({
         host: 'raw.github.com',
         path: path,
